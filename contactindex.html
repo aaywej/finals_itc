@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Rentry Commissions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="loading-overlay">
+  <div class="heart-loader"></div>
+</div>
+<header>
+  <div class="logo">Rentry Commissions</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="examplesindex.html">Examples</a>
+    <a href="orderindex.html">Order</a>
+    <a href="pricingindex.html">Pricing</a>
+    <a href="index.html" class="active">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section class="fade-in">
+    <h1>Contact Me</h1>
+    <p>Have questions or want to reach out? Fill out the form below!</p>
+
+    <form id="contact-form" onsubmit="handleContact(event)">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" placeholder="e.g. Aya" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="4" placeholder="Write your message here..." required></textarea>
+
+      <button type="submit" class="btn" style="margin-top:12px;">Send Message</button>
+    </form>
+
+    <p style="margin-top:16px;">Or visit my <a href="contactsocials.html">socials page</a> for direct contact links.</p>
+  </section>
+
+<section class="faq fade-in">
+  <h2>FAQ</h2>
+
+  <div class="faq-item">
+    <strong>Q: How long until you respond?</strong>
+    <p>A: Usually within 24 hours! If I’m busy, it might take a little longer, but I’ll always get back to you.</p>
+  </div>
+
+  <div class="faq-item">
+    <strong>Q: Can I ask about commissions through DMs?</strong>
+    <p>A: Absolutely! Feel free to DM me anytime for inquiries or price checks before ordering.</p>
+  </div>
+
+  <div class="faq-item">
+    <strong>Q: Where do I place a commission?</strong>
+    <p>A: You can message me directly on my socials or fill out the commission form in this website.</p>
+  </div>
+
+  <div class="faq-item">
+    <strong>Q: Will I get updates while you work on it?</strong>
+    <p>A: Yes! I send WIPs (work-in-progress shots) through DMs so you can check and approve before finalizing.</p>
+  </div>
+
+  <div class="faq-item">
+    <strong>Q: Do you post commissions on your page?</strong>
+    <p>A: Sometimes! I usually ask permission first. You can request to keep it private if you’d like.</p>
+  </div>
+
+  <div class="faq-item">
+    <strong>Q: Can I ask for changes after it’s done?</strong>
+    <p>A: Small fixes are fine, but major changes after completion may cost extra.</p>
+  </div>
+
+  <div class="faq-item">
+    <strong>Q: Do you take rush commissions?</strong>
+    <p>A: Yes, depending on my schedule! Rush fees may apply for tight deadlines.</p>
+  </div>
+
+  <div class="faq-item">
+    <strong>Q: What’s your refund policy?</strong>
+    <p>A: Full refunds are only possible if I haven’t started yet. Once progress has begun, only partial refunds apply.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Jiu's Commissions</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+function handleContact(e){
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  alert(`Thank you, ${name}! Your message has been received.\nI will contact you at ${email} soon.`);
+  document.getElementById('contact-form').reset();
+}
+</script>
+</body>
+</html>
