@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Place an Order — Rentry Commissions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="loading-overlay">
+  <div class="heart-loader"></div>
+</div>
+<header>
+  <div class="logo">Rentry Commissions</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="examplesindex.html">Examples</a>
+    <a href="index.html" class="active">Order</a>
+    <a href="pricingindex.html">Pricing</a>
+    <a href="contactindex.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section class="fade-in">
+    <h1>Place an Order</h1>
+    <p>Fill out the form below. I will respond within 24 hours with payment details.</p>
+
+    <form id="order-form" onsubmit="handleOrder(event)">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" placeholder="e.g. Aya" required>
+
+      <label for="email">Email / Contact</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+      <label for="package">Package</label>
+      <select id="package" name="package">
+        <option value="chibi">Chibi — ₱250</option>
+        <option value="waist">Waist-up — ₱550</option>
+        <option value="full">Fullbody — ₱1100</option>
+        <option value="pack">3-Pose Pack — ₱2500</option>
+      </select>
+
+      <label for="notes">Reference / Notes</label>
+      <textarea id="notes" name="notes" rows="4" placeholder="Describe characters, pose, colors, or attach links..."></textarea>
+
+      <div style="margin-top:12px;">
+        Estimated Total: <strong id="estimate">₱250</strong>
+      </div>
+
+      <button type="submit" class="btn" style="margin-top:12px;">Submit Order</button>
+    </form>
+  </section>
+
+  <section class="faq fade-in">
+    <h2>FAQ</h2>
+    <div class="faq-item">
+      <strong>Q: Can I request multiple characters?</strong>
+      <p>A: Yes, each extra character is +50% of the base price.</p>
+    </div>
+    <div class="faq-item">
+      <strong>Q: How do I send references?</strong>
+      <p>A: Attach links in the notes field or send via email after submission.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Rentry Commissions</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+const prices = { chibi:250, waist:550, full:1100, pack:2500 };
+const packageSelect = document.getElementById('package');
+const estimate = document.getElementById('estimate');
+
+packageSelect.addEventListener('change', () => {
+  estimate.textContent = '₱' + prices[packageSelect.value];
+});
+
+function handleOrder(e){
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const pkg = packageSelect.value;
+  const total = prices[pkg];
+  // Redirect to confirmation page with query parameters
+  window.location.href = 'orderconfirm.html?name=' + encodeURIComponent(name) + '&package=' + encodeURIComponent(pkg) + '&total=' + total;
+}
+</script>
+</body>
+</html>

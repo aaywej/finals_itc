@@ -1,0 +1,134 @@
+:root{
+  --pink1: #ffe4f0;
+  --pink2: #ffb3e0;
+  --accent: #ff4da6;
+  --muted: #6b4a5a;
+  --shadow: 0 8px 24px rgba(107,74,90,0.12);
+  font-family: Inter, sans-serif;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+
+body {
+  background: linear-gradient(135deg, var(--pink1), var(--pink2));
+  color: #3a2230;
+  line-height: 1.6;
+}
+
+header{
+  display:flex; justify-content:space-between; align-items:center; padding:16px 32px; background: rgba(255,255,255,0.6); box-shadow: var(--shadow);
+}
+.logo{font-weight:800;}
+nav a{margin-left:12px; text-decoration:none; color:var(--muted); font-weight:600; padding:6px 10px; border-radius:8px;}
+nav a.active, nav a:hover{background:rgba(255,255,255,0.8); color:#3a2230;}
+
+main{max-width:1100px; margin:24px auto; padding:0 16px;}
+.hero{display:grid; grid-template-columns:1fr 300px; gap:24px; align-items:center; margin-bottom:32px;}
+.hero-text h1{font-size:32px; margin-bottom:12px;}
+.hero-text p{color:var(--muted); margin-bottom:12px;}
+.btn{display:inline-block; background:var(--accent); color:white; padding:10px 16px; border-radius:12px; text-decoration:none; font-weight:700;}
+.placeholder-img{width:100%; height:200px; background:rgba(255,255,255,0.6); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--muted);}
+
+/* Cards */
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px;}
+.card{background:rgba(255,255,255,0.8); padding:16px; border-radius:16px; box-shadow:var(--shadow); text-align:center;}
+
+/* FAQ */
+.faq{margin-top:32px; background:rgba(255,255,255,0.6); padding:16px; border-radius:16px;}
+.faq-item{margin-bottom:12px;}
+
+/* Footer */
+footer{text-align:center; padding:16px; color:var(--muted);}
+
+/* Animations */
+.fade-in{opacity:0; animation:fadeIn 1s forwards;}
+@keyframes fadeIn{to{opacity:1;}}
+.float{animation:float 3s ease-in-out infinite;}
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+
+/* Responsive */
+@media (max-width:900px){.hero{grid-template-columns:1fr;}}
+
+/* 🌸 Loader overlay */
+#loading-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255, 182, 224, 0.9); /* soft pink overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+#loading-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* 💖 Cute heart loader */
+.heart-loader {
+  position: relative;
+  width: 50px;
+  height: 45px;
+  background-color: #ff4da6;
+  transform: rotate(-45deg);
+  animation: beat 1s infinite ease-in-out;
+}
+
+.heart-loader::before,
+.heart-loader::after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 45px;
+  background-color: #ff4da6;
+  border-radius: 50%;
+}
+
+.heart-loader::before {
+  top: -25px;
+  left: 0;
+}
+
+.heart-loader::after {
+  left: 25px;
+  top: 0;
+}
+
+/* 💞 Heart beating animation */
+@keyframes beat {
+  0%, 100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  50% {
+    transform: rotate(-45deg) scale(1.2);
+  }
+}
+
+textarea {
+  resize: both;
+  max-height: 150px; /* optional height limit */
+  min-height: 100px; /* to keep it reasonable */
+  max-width: 200px;
+  min-width: 150px;
+}
+
+.hero-img img {
+  width: 50%;
+  max-width: 400px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.placeholder-img {
+  width: 100%;      /* fills the container width */
+  max-width: 300px; /* maximum size */
+  height: auto;     /* keeps aspect ratio */
+  border-radius: 10px;
+}
