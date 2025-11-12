@@ -35,17 +35,16 @@
 
       <label for="package">Package</label>
       <select id="package" name="package">
-        <option value="chibi">Chibi — ₱250</option>
-        <option value="waist">Waist-up — ₱550</option>
-        <option value="full">Fullbody — ₱1100</option>
-        <option value="pack">3-Pose Pack — ₱2500</option>
+        <option value="chibi">Basic Rentry — $5</option>
+        <option value="waist">Simple Rentry — $10</option>
+        <option value="full">Complex Rentry — $15</option>
       </select>
 
       <label for="notes">Reference / Notes</label>
       <textarea id="notes" name="notes" rows="4" placeholder="Describe characters, pose, colors, or attach links..."></textarea>
 
       <div style="margin-top:12px;">
-        Estimated Total: <strong id="estimate">₱250</strong>
+        Estimated Total: <strong id="estimate">$5</strong>
       </div>
 
       <button type="submit" class="btn" style="margin-top:12px;">Submit Order</button>
@@ -55,8 +54,8 @@
   <section class="faq fade-in">
     <h2>FAQ</h2>
     <div class="faq-item">
-      <strong>Q: Can I request multiple characters?</strong>
-      <p>A: Yes, each extra character is +50% of the base price.</p>
+      <strong>Q: How can I know the very total?</strong>
+      <p>A: Once you have placed an order, instructions within the email have been sent automatically. Clicking it will direct you to a chat where we are able to talk the add-ons..</p>
     </div>
     <div class="faq-item">
       <strong>Q: How do I send references?</strong>
@@ -76,7 +75,7 @@ const packageSelect = document.getElementById('package');
 const estimate = document.getElementById('estimate');
 
 packageSelect.addEventListener('change', () => {
-  estimate.textContent = '₱' + prices[packageSelect.value];
+  estimate.textContent = '$' + prices[packageSelect.value];
 });
 
 function handleOrder(e){
@@ -91,3 +90,4 @@ function handleOrder(e){
 </script>
 </body>
 </html>
+
