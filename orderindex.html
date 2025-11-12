@@ -24,7 +24,7 @@
 <main>
   <section class="fade-in">
     <h1>Place an Order</h1>
-    <p>Fill out the form below. I will respond within 24 hours with payment details.</p>
+    <p>Fill out the form below. I will respond within 48 hours with payment details.</p>
 
     <form id="order-form" onsubmit="handleOrder(event)">
       <label for="name">Your Name</label>
@@ -35,9 +35,9 @@
 
       <label for="package">Package</label>
       <select id="package" name="package">
-        <option value="chibi">Basic Rentry — $5</option>
-        <option value="waist">Simple Rentry — $10</option>
-        <option value="full">Complex Rentry — $15</option>
+        <option value="basic">Basic Rentry — $5</option>
+        <option value="simple">Simple Rentry — $10</option>
+        <option value="complex">Complex Rentry — $15</option>
       </select>
 
       <label for="notes">Reference / Notes</label>
@@ -70,7 +70,7 @@
 
 <script src="script.js"></script>
 <script>
-const prices = { chibi:250, waist:550, full:1100, pack:2500 };
+const prices = { basic:5, simple:10, complex:15 };
 const packageSelect = document.getElementById('package');
 const estimate = document.getElementById('estimate');
 
@@ -90,4 +90,5 @@ function handleOrder(e){
 </script>
 </body>
 </html>
+
 
