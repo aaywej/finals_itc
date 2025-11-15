@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Add-ons — Jiu's Commissions</title>
 
-<!-- Fonts & Icons -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
@@ -23,7 +22,6 @@ body{
   background: linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:var(--muted); overflow-x:hidden;
 }
 
-/* Header */
 header{
   position: sticky; top:0; z-index:50; backdrop-filter: blur(10px);
   background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
@@ -40,20 +38,17 @@ nav a{
 }
 nav a:hover, nav a.active{ background: var(--glass); color:#2c1520; box-shadow:0 8px 20px rgba(255,77,166,0.2); }
 
-/* Main */
 main{ max-width:var(--max-width); margin:60px auto; padding:20px; position:relative; }
 h1,h2{ font-family:Poppins, sans-serif; text-transform:none; }
 h1{ font-size:36px; margin-bottom:20px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
 h2{ font-size:26px; margin-bottom:18px; color:var(--muted); }
 
-/* Floating shapes */
 .shape{ position:absolute; border-radius:50%; background: linear-gradient(45deg,#ff82c9,#ff4da6); opacity:0.2; animation: float 10s infinite ease-in-out alternate; z-index:0; }
 .shape.one{ width:120px; height:120px; top:5%; left:10%; animation-delay:0s; }
 .shape.two{ width:180px; height:180px; top:50%; left:75%; animation-delay:3s; }
 .shape.three{ width:90px; height:90px; top:75%; left:25%; animation-delay:6s; }
 @keyframes float{0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-25px) rotate(45deg);}100%{transform:translateY(0) rotate(0deg);}}
 
-/* Cards */
 .cards{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:28px; margin-top:20px; position:relative; z-index:1; }
 .card{
   background: var(--glass); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow:hidden; cursor:pointer;
@@ -65,7 +60,6 @@ h2{ font-size:26px; margin-bottom:18px; color:var(--muted); }
 .card p{ padding:12px; text-align:center; font-size:15px; font-weight:500; color:#5b3a46; }
 @keyframes floatCard{0%{ transform: translateY(0);}50%{ transform: translateY(-8px);}100%{ transform: translateY(0);}}
 
-/* FAQ */
 .faq{ margin-top:50px; display:grid; gap:14px; position:relative; z-index:1; }
 .faq-item{
   border-radius: var(--radius-lg); overflow:hidden; background: var(--glass);
@@ -85,17 +79,14 @@ h2{ font-size:26px; margin-bottom:18px; color:var(--muted); }
 .faq-item.open .faq-a{ display:block; animation: slideDown 0.3s ease; }
 @keyframes slideDown{ from{ opacity:0; transform: translateY(-6px);} to{ opacity:1; transform:none;} }
 
-/* Footer */
 footer{ text-align:center; color:#7b535f; margin:60px 0 100px 0; font-size:14px; }
 
-/* Fade-in animation for sections */
 .fade-in{ opacity:0; transform: translateY(20px); animation: fadeUp 0.8s forwards; }
 @keyframes fadeUp{ to{opacity:1; transform:translateY(0);} }
 </style>
 </head>
 <body>
 
-<!-- Floating shapes -->
 <div class="shape one"></div>
 <div class="shape two"></div>
 <div class="shape three"></div>
@@ -163,15 +154,14 @@ footer{ text-align:center; color:#7b535f; margin:60px 0 100px 0; font-size:14px;
 <script>
 AOS.init({ duration:800, once:true, easing:'ease-out-cubic' });
 
-// FAQ toggle
 document.querySelectorAll('.faq-item').forEach(item=>{
   const q = item.querySelector('.faq-q');
   q.addEventListener('click',()=> item.classList.toggle('open'));
 });
 
-// Current year
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
 </body>
 </html>
+
