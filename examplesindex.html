@@ -67,7 +67,6 @@
   h1{ font-size:32px; margin-bottom:16px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
   h2{ font-size:24px; margin-bottom:14px; color:var(--muted); }
 
-  /* Animated Background Shapes */
   .shape{
     position:absolute;
     border-radius:50%;
@@ -125,7 +124,6 @@
 
   footer{ text-align:center; color:#7b535f; margin:60px 0 80px 0; font-size:14px; }
 
-  /* Heart Loading Overlay */
   #loading-overlay{
     position:fixed; inset:0; background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,246,249,0.96));
     z-index:9999; display:flex; align-items:center; justify-content:center; transition: opacity .36s ease;
@@ -159,7 +157,6 @@
   </div>
 </div>
 
-<!-- Animated background shapes -->
 <div class="shape one"></div>
 <div class="shape two"></div>
 <div class="shape three"></div>
@@ -232,7 +229,6 @@
 <script>
   AOS.init({ duration:700, once:true, easing:'ease-out-cubic' });
 
-  // FAQ toggle
   document.querySelectorAll('.faq-q').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const item = btn.parentElement;
@@ -242,10 +238,8 @@
     });
   });
 
-  // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Heart Loading Overlay
   (function(){
     const overlay = document.getElementById('loading-overlay');
 
@@ -270,3 +264,4 @@
 </script>
 </body>
 </html>
+
