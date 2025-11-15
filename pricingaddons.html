@@ -1,66 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add-ons — Rentry Commissions</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add-ons — Jiu's Commissions</title>
+
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+<style>
+:root{
+  --bg-1:#fff0f6; --bg-2:#ffe6f2; --accent:#ff4da6; --accent-2:#ff82c9;
+  --muted:#5b3a46; --glass:rgba(255,255,255,0.7); --shadow:0 12px 40px rgba(255,77,166,0.2);
+  --radius-lg:20px; --max-width:1200px;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0; font-family:Inter, Poppins, system-ui, -apple-system, "Segoe UI", Roboto;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:var(--muted); overflow-x:hidden;
+}
+
+/* Header */
+header{
+  position: sticky; top:0; z-index:50; backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
+  border-bottom:1px solid rgba(255,255,255,0.5); box-shadow:0 4px 12px rgba(0,0,0,0.04);
+}
+.header-inner{
+  max-width:var(--max-width); margin:0 auto; padding:14px 20px;
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+}
+.logo{ display:flex; align-items:center; gap:10px; font-weight:800; color: var(--muted);}
+.logo img{ height:50px; width:auto; border-radius:12px; box-shadow:0 8px 22px rgba(255,77,166,0.3);}
+nav a{
+  text-decoration:none; color:var(--muted); padding:8px 14px; border-radius:12px; font-weight:600; transition:.3s;
+}
+nav a:hover, nav a.active{ background: var(--glass); color:#2c1520; box-shadow:0 8px 20px rgba(255,77,166,0.2); }
+
+/* Main */
+main{ max-width:var(--max-width); margin:60px auto; padding:20px; position:relative; }
+h1,h2{ font-family:Poppins, sans-serif; text-transform:none; }
+h1{ font-size:36px; margin-bottom:20px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+h2{ font-size:26px; margin-bottom:18px; color:var(--muted); }
+
+/* Floating shapes */
+.shape{ position:absolute; border-radius:50%; background: linear-gradient(45deg,#ff82c9,#ff4da6); opacity:0.2; animation: float 10s infinite ease-in-out alternate; z-index:0; }
+.shape.one{ width:120px; height:120px; top:5%; left:10%; animation-delay:0s; }
+.shape.two{ width:180px; height:180px; top:50%; left:75%; animation-delay:3s; }
+.shape.three{ width:90px; height:90px; top:75%; left:25%; animation-delay:6s; }
+@keyframes float{0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-25px) rotate(45deg);}100%{transform:translateY(0) rotate(0deg);}}
+
+/* Cards */
+.cards{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:28px; margin-top:20px; position:relative; z-index:1; }
+.card{
+  background: var(--glass); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow:hidden; cursor:pointer;
+  transition: transform .4s ease, box-shadow .4s ease; perspective:1000px;
+  animation: floatCard 6s ease-in-out infinite alternate;
+}
+.card:hover{ transform: translateY(-12px) rotateX(3deg) rotateY(2deg) scale(1.06); box-shadow: 0 25px 50px rgba(255,77,166,0.35); }
+.card img, .card .placeholder-img{ width:100%; display:flex; justify-content:center; align-items:center; border-radius: var(--radius-lg); height:150px; font-weight:700; color:#fff; background: linear-gradient(90deg,var(--accent),var(--accent-2)); }
+.card p{ padding:12px; text-align:center; font-size:15px; font-weight:500; color:#5b3a46; }
+@keyframes floatCard{0%{ transform: translateY(0);}50%{ transform: translateY(-8px);}100%{ transform: translateY(0);}}
+
+/* FAQ */
+.faq{ margin-top:50px; display:grid; gap:14px; position:relative; z-index:1; }
+.faq-item{
+  border-radius: var(--radius-lg); overflow:hidden; background: var(--glass);
+  border:1px solid rgba(255,255,255,0.6); box-shadow: var(--shadow); transition:.4s ease; cursor:pointer; position:relative;
+}
+.faq-item:hover{ transform: translateY(-4px) scale(1.01); }
+.faq-q{
+  padding:16px 18px; display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px;
+  background:none; border:none; width:100%;
+}
+.faq-q i{ transition:.3s; }
+.faq-item.open .faq-q i{ transform: rotate(180deg); }
+.faq-a{
+  padding:14px 18px; font-size:14px; color:#564042; display:none; border-top:1px solid rgba(200,160,170,0.08);
+  background: linear-gradient(90deg, rgba(255,77,166,0.05), rgba(255,130,201,0.05));
+}
+.faq-item.open .faq-a{ display:block; animation: slideDown 0.3s ease; }
+@keyframes slideDown{ from{ opacity:0; transform: translateY(-6px);} to{ opacity:1; transform:none;} }
+
+/* Footer */
+footer{ text-align:center; color:#7b535f; margin:60px 0 100px 0; font-size:14px; }
+
+/* Fade-in animation for sections */
+.fade-in{ opacity:0; transform: translateY(20px); animation: fadeUp 0.8s forwards; }
+@keyframes fadeUp{ to{opacity:1; transform:translateY(0);} }
+</style>
 </head>
 <body>
-<div id="loading-overlay">
-  <div class="heart-loader"></div>
-</div>
+
+<!-- Floating shapes -->
+<div class="shape one"></div>
+<div class="shape two"></div>
+<div class="shape three"></div>
+
 <header>
-  <div class="logo">Rentry Commissions</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="examplesindex.html">Examples</a>
-    <a href="orderindex.html">Order</a>
-    <a href="index.html">Pricing</a>
-    <a href="contactindex.html">Contact</a>
-  </nav>
+  <div class="header-inner">
+    <div class="logo">
+      <img src="https://files.catbox.moe/vv2hva.png" alt="Jiu's Commissions Logo">
+      <div style="display:flex; flex-direction:column;">
+        <div style="font-size:14px; font-weight:700;">Jiu's Commissions</div>
+        <div style="font-size:11px; color:#8a5e68; margin-top:2px;">Rentry & Commission Service</div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="examplesindex.html">Examples</a>
+      <a href="orderindex.html">Order</a>
+      <a href="pricingaddons.html" class="active">Pricing</a>
+      <a href="contactindex.html">Contact</a>
+    </nav>
+  </div>
 </header>
 
 <main>
-  <section class="fade-in">
-    <h1>Add-ons & Upgrades</h1>
-    <div class="cards">
-      <div class="card float">
-        <div class="placeholder-img" style="height:150px;">Extra Page</div>
-        <p>+$5 with maximum of 5 pages</p>
-      </div>
-      <div class="card float">
-        <div class="placeholder-img" style="height:150px;">Gif-fied Page</div>
-        <p>+$2 minimum depending on the complexity</p>
-      </div>
-      <div class="card float">
-        <div class="placeholder-img" style="height:150px;">Commercial Use</div>
-        <p>+$20</p>
-      </div>
-      <div class="card float">
-        <div class="placeholder-img" style="height:150px;">Rush</div>
-        <p>Rush (2-day turnaround): +30% of total</p>
-      </div>
+<section class="fade-in">
+  <h1>Add-ons & Upgrades</h1>
+  <div class="cards">
+    <div class="card" data-aos="zoom-in" data-aos-delay="50">
+      <div class="placeholder-img">Extra Page</div>
+      <p>+$5 with maximum of 5 pages</p>
     </div>
-  </section>
+    <div class="card" data-aos="zoom-in" data-aos-delay="100">
+      <div class="placeholder-img">Gif-fied Page</div>
+      <p>+$2 minimum depending on complexity</p>
+    </div>
+    <div class="card" data-aos="zoom-in" data-aos-delay="150">
+      <div class="placeholder-img">Commercial Use</div>
+      <p>+$20</p>
+    </div>
+    <div class="card" data-aos="zoom-in" data-aos-delay="200">
+      <div class="placeholder-img">Rush</div>
+      <p>Rush (2-day turnaround): +30% of total</p>
+    </div>
+  </div>
+</section>
 
-  <section class="faq fade-in">
-    <h2>FAQ</h2>
-    <div class="faq-item">
-      <strong>Q: How to request the add-ons?</strong>
-      <p>A: Mention it in the reference/note in the order submission and the instructions will be sent via email.</p>
-    </div>
-    <div class="faq-item">
-      <strong>Q: Can I request multiple add-ons?</strong>
-      <p>A: Yes, the total price will be sent through your email.</p>
-    </div>
-  </section>
+<section class="faq" data-aos="fade-up">
+<h2>FAQ</h2>
+<div class="faq-item">
+  <div class="faq-q"><span>Q: How to request the add-ons?</span><i class="fa-solid fa-chevron-down"></i></div>
+  <div class="faq-a">A: Mention it in the reference/note in the order submission and instructions will be sent via email.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q"><span>Q: Can I request multiple add-ons?</span><i class="fa-solid fa-chevron-down"></i></div>
+  <div class="faq-a">A: Yes, the total price will be sent through your email.</div>
+</div>
+</section>
 </main>
 
 <footer>
-  <p>© <span id="year"></span> Jiu's Commissions</p>
+<p>© <span id="year"></span> Jiu's Commissions</p>
 </footer>
-<script src="script.js"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({ duration:800, once:true, easing:'ease-out-cubic' });
+
+// FAQ toggle
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const q = item.querySelector('.faq-q');
+  q.addEventListener('click',()=> item.classList.toggle('open'));
+});
+
+// Current year
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
-
