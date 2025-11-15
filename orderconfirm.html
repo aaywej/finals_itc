@@ -1,61 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Confirmation — Rentry Commissions</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmation — Jiu's Commissions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+<style>
+:root{
+  --bg-1:#fff0f6; --bg-2:#ffe6f2; --accent:#ff4da6; --accent-2:#ff82c9;
+  --muted:#5b3a46; --glass:rgba(255,255,255,0.7); --shadow:0 12px 40px rgba(255,77,166,0.2);
+  --radius-lg:20px; --max-width:900px;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0; font-family:Inter, Poppins, system-ui, -apple-system, "Segoe UI", Roboto;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:var(--muted); overflow-x:hidden;
+}
+
+/* Header */
+header{
+  position: sticky; top:0; z-index:50; backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6));
+  border-bottom:1px solid rgba(255,255,255,0.5); box-shadow:0 4px 12px rgba(0,0,0,0.04);
+}
+.header-inner{
+  max-width:var(--max-width); margin:0 auto; padding:14px 20px;
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+}
+.logo{ display:flex; align-items:center; gap:10px; font-weight:800; color: var(--muted);}
+.logo img{ height:50px; width:auto; border-radius:12px; box-shadow:0 8px 22px rgba(255,77,166,0.3);}
+nav a{
+  text-decoration:none; color:var(--muted); padding:8px 14px; border-radius:12px; font-weight:600; transition:.3s;
+}
+nav a:hover, nav a.active{ background: var(--glass); color:#2c1520; box-shadow:0 8px 20px rgba(255,77,166,0.2); }
+
+/* Main */
+main{ max-width:var(--max-width); margin:60px auto; padding:20px; position:relative; text-align:center; }
+
+h1,h2{ font-family:Poppins, sans-serif; text-transform:none; }
+h1{ font-size:36px; margin-bottom:16px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; color:transparent; animation: popIn 0.8s ease forwards;}
+h2{ font-size:24px; margin-bottom:14px; color:var(--muted); }
+
+/* Button */
+.btn{
+  display:inline-block; background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#fff; font-weight:700; padding:12px 24px; border-radius:16px; text-decoration:none;
+  transition:.3s;
+}
+.btn:hover{ transform:scale(1.05); box-shadow:0 12px 32px rgba(255,77,166,0.4); }
+
+/* Floating shapes */
+.shape{ position:absolute; border-radius:50%; background: linear-gradient(45deg,#ff82c9,#ff4da6); opacity:0.25; animation: float 8s infinite ease-in-out alternate; z-index:0; }
+.shape.one{ width:100px; height:100px; top:10%; left:15%; animation-delay:0s; }
+.shape.two{ width:150px; height:150px; top:40%; left:70%; animation-delay:2s; }
+.shape.three{ width:80px; height:80px; top:70%; left:25%; animation-delay:4s; }
+@keyframes float{0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-20px) rotate(45deg);}100%{transform:translateY(0) rotate(0deg);}}
+
+/* Confetti hearts */
+.heart{ position:absolute; width:20px; height:20px; background:linear-gradient(45deg,#ff4da6,#ff82c9); clip-path: polygon(50% 0%, 61% 15%, 75% 15%, 85% 25%, 85% 40%, 50% 100%, 15% 40%, 15% 25%, 25% 15%, 39% 15%); opacity:0.9; animation: floatHeart linear infinite; }
+@keyframes floatHeart{0%{transform:translateY(0) rotate(0deg); opacity:1;}100%{transform:translateY(-600px) rotate(360deg); opacity:0;}}
+
+/* FAQ */
+.faq{ margin-top:40px; display:grid; gap:12px; position:relative; z-index:1; text-align:left; }
+.faq-item{ border-radius: var(--radius-lg); overflow:hidden; background: var(--glass); border:1px solid rgba(255,255,255,0.6); box-shadow: var(--shadow); cursor:pointer; transition:.3s; }
+.faq-item:hover{ transform: scale(1.02); box-shadow: 0 18px 48px rgba(255,77,166,0.25); }
+.faq-q{ padding:14px 16px; display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px; background:none; border:none; width:100%; }
+.faq-a{ padding:12px 16px; font-size:14px; color:#564042; display:none; border-top:1px solid rgba(200,160,170,0.08);}
+.faq-item.open .faq-a{ display:block; animation: slideDown .28s ease; }
+@keyframes slideDown{ from{ opacity:0; transform: translateY(-6px);} to{ opacity:1; transform:none;} }
+
+/* Animations */
+@keyframes popIn{0%{transform:scale(0.8);opacity:0;}100%{transform:scale(1);opacity:1;}}
+
+footer{ text-align:center; color:#7b535f; margin:60px 0 80px 0; font-size:14px; }
+
+</style>
 </head>
 <body>
-<div id="loading-overlay">
-  <div class="heart-loader"></div>
-</div>
+
+<!-- Floating shapes -->
+<div class="shape one"></div>
+<div class="shape two"></div>
+<div class="shape three"></div>
+
 <header>
-  <div class="logo">Rentry Commissions</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="examplesindex.html">Examples</a>
-    <a href="index.html" class="active">Order</a>
-    <a href="pricingindex.html">Pricing</a>
-    <a href="contactindex.html">Contact</a>
-  </nav>
+  <div class="header-inner">
+    <div class="logo">
+      <img src="https://files.catbox.moe/vv2hva.png" alt="Jiu's Commissions Logo">
+      <div style="display:flex; flex-direction:column;">
+        <div style="font-size:14px; font-weight:700;">Jiu's Commissions</div>
+        <div style="font-size:11px; color:#8a5e68; margin-top:2px;">Rentry & Commission Service</div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="examplesindex.html">Examples</a>
+      <a href="orderindex.html" class="active">Order</a>
+      <a href="pricingindex.html">Pricing</a>
+      <a href="contactindex.html">Contact</a>
+    </nav>
+  </div>
 </header>
 
 <main>
-  <section class="fade-in">
-    <h1>Thank You!</h1>
-    <p id="summary">Your order has been submitted successfully. Please check your email for payment instructions.</p>
-    <a href="index.html" class="btn" style="margin-top:12px;display:inline-block;">Return Home</a>
-  </section>
+<section class="fade-in" data-aos="fade-up">
+  <h1>Thank You!</h1>
+  <p id="summary">Your order has been submitted successfully. Please check your email for payment instructions.</p>
+  <a href="index.html" class="btn" style="margin-top:12px;display:inline-block;">Return Home</a>
+</section>
 
-  <section class="faq fade-in">
-    <h2>FAQ</h2>
-    <div class="faq-item">
-      <strong>Q: How long until I receive my artwork?</strong>
-      <p>A: Typically 3–10 business days depending on the package and complexity.</p>
-    </div>
-    <div class="faq-item">
-      <strong>Q: Can I revise my order after submission?</strong>
-      <p>A: Minor revisions (2) are included. Major changes may require extra time or cost.</p>
-    </div>
-  </section>
+<section class="faq" data-aos="fade-up">
+<h2>FAQ</h2>
+<div class="faq-item">
+  <strong>Q: How long until I receive my artwork?</strong>
+  <p>A: Typically 3–10 business days depending on the package and complexity.</p>
+</div>
+<div class="faq-item">
+  <strong>Q: Can I revise my order after submission?</strong>
+  <p>A: Minor revisions (2) are included. Major changes may require extra time or cost.</p>
+</div>
+<div class="faq-item">
+  <strong>Q: What payment methods do you accept?</strong>
+  <p>A: Payments can be made via GCash, PayPal, or VGen. 50% upfront, 50% after completion.</p>
+</div>
+</section>
 </main>
 
 <footer>
-  <p>© <span id="year"></span> Jiu's Commissions</p>
+<p>© <span id="year"></span> Jiu's Commissions</p>
 </footer>
 
-<script src="script.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+AOS.init({ duration:700, once:true, easing:'ease-out-cubic' });
 
+// FAQ toggle
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    item.classList.toggle('open');
+  });
+});
+
+// Year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Dynamic order summary
 const params = new URLSearchParams(window.location.search);
 const name = params.get('name');
 const pkg = params.get('package');
 const total = params.get('total');
-
 if(name && pkg && total){
   document.getElementById('summary').textContent = `Thank you, ${name}! Your ${pkg} order totaling ₱${total} has been received. You will be contacted via email with payment instructions.`;
 }
+
+// Generate floating hearts
+function createHeart(){
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.style.left = Math.random()*100 + 'vw';
+  heart.style.animationDuration = (4 + Math.random()*4)+'s';
+  heart.style.width = 15 + Math.random()*15 + 'px';
+  heart.style.height = heart.style.width;
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),8000);
+}
+setInterval(createHeart,300);
 </script>
 </body>
 </html>
