@@ -1,87 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricing — Rentry Commissions</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Jiu's Commissions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+<style>
+:root{
+  --bg-1:#fff0f6; --bg-2:#ffe6f2; --accent:#ff4da6; --accent-2:#ff82c9;
+  --muted:#5b3a46; --glass:rgba(255,255,255,0.7); --shadow:0 12px 40px rgba(255,77,166,0.2);
+  --radius-lg:20px; --max-width:1200px;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0; font-family:Inter, Poppins, system-ui, -apple-system, "Segoe UI", Roboto;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:var(--muted);
+  overflow-x:hidden;
+}
+
+header{
+  position: sticky; top:0; z-index:50; backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
+  border-bottom:1px solid rgba(255,255,255,0.5); box-shadow:0 4px 12px rgba(0,0,0,0.04);
+}
+.header-inner{
+  max-width:var(--max-width); margin:0 auto; padding:14px 20px;
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+}
+.logo{ display:flex; align-items:center; gap:10px; font-weight:800; color: var(--muted);}
+.logo img{ height:50px; width:auto; border-radius:12px; box-shadow:0 8px 22px rgba(255,77,166,0.3);}
+nav a{
+  text-decoration:none; color:var(--muted); padding:8px 14px; border-radius:12px; font-weight:600; transition:.3s;
+}
+nav a:hover, nav a.active{ background: var(--glass); color:#2c1520; box-shadow:0 8px 20px rgba(255,77,166,0.2); }
+
+main{ max-width:var(--max-width); margin:40px auto; padding:20px; position:relative; }
+
+h1,h2{ font-family:Poppins, sans-serif; text-transform:none; }
+h1{ font-size:36px; margin-bottom:20px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+h2{ font-size:26px; margin-bottom:18px; color:var(--muted); }
+
+.shape{
+  position:absolute; border-radius:50%; background: linear-gradient(45deg,#ff82c9,#ff4da6); opacity:0.2;
+  animation: float 10s infinite ease-in-out alternate; z-index:0;
+}
+.shape.one{ width:120px; height:120px; top:5%; left:10%; animation-delay:0s; }
+.shape.two{ width:180px; height:180px; top:50%; left:75%; animation-delay:3s; }
+.shape.three{ width:90px; height:90px; top:75%; left:25%; animation-delay:6s; }
+@keyframes float{0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-25px) rotate(45deg);}100%{transform:translateY(0) rotate(0deg);}}
+
+.cards{ display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:28px; margin-top:20px; position:relative; z-index:1; }
+.card{
+  background: var(--glass); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow:hidden; cursor:pointer;
+  transition: transform .4s ease, box-shadow .4s ease; display:flex; flex-direction:column; align-items:center; text-align:center; padding:12px;
+}
+.card:hover{ transform: translateY(-12px) rotateX(3deg) rotateY(2deg) scale(1.06); box-shadow: 0 25px 50px rgba(255,77,166,0.35); }
+.card img, .card .placeholder-img{ width:100%; max-height:180px; object-fit:cover; border-radius: var(--radius-lg); margin-bottom:12px; }
+.card p{ font-size:15px; font-weight:500; color:#5b3a46; }
+
+.btn{
+  display:inline-block; background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#fff; font-weight:700; padding:14px 28px; border-radius:20px; text-decoration:none;
+  transition:.3s;
+}
+.btn:hover{ transform:scale(1.05); box-shadow:0 16px 36px rgba(255,77,166,0.45); }
+
+.faq{ margin-top:50px; display:grid; gap:14px; position:relative; z-index:1; }
+.faq-item{
+  border-radius: var(--radius-lg); overflow:hidden; background: var(--glass);
+  border:1px solid rgba(255,255,255,0.6); box-shadow: var(--shadow); transition:.4s ease; cursor:pointer; position:relative;
+}
+.faq-item:hover{ transform: translateY(-4px) scale(1.01); }
+.faq-q{
+  padding:16px 18px; display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px;
+  background:none; border:none; width:100%;
+}
+.faq-q i{ transition:.3s; }
+.faq-item.open .faq-q i{ transform: rotate(180deg); }
+.faq-a{
+  padding:14px 18px; font-size:14px; color:#564042; display:none; border-top:1px solid rgba(200,160,170,0.08);
+  background: linear-gradient(90deg, rgba(255,77,166,0.05), rgba(255,130,201,0.05));
+}
+.faq-item.open .faq-a{ display:block; animation: slideDown 0.3s ease; }
+@keyframes slideDown{ from{ opacity:0; transform: translateY(-6px);} to{ opacity:1; transform:none;} }
+
+.fade-in{ opacity:0; transform: translateY(20px); animation: fadeUp 0.8s forwards; }
+@keyframes fadeUp{ to{opacity:1; transform:translateY(0);} }
+
+footer{ text-align:center; color:#7b535f; margin:60px 0 100px 0; font-size:14px; }
+</style>
 </head>
 <body>
-<div id="loading-overlay">
-  <div class="heart-loader"></div>
-</div>
+
+<div class="shape one"></div>
+<div class="shape two"></div>
+<div class="shape three"></div>
+
 <header>
-  <div class="logo">Rentry Commissions</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="examplesindex.html">Examples</a>
-    <a href="orderindex.html">Order</a>
-    <a href="index.html" class="active">Pricing</a>
-    <a href="contactindex.html">Contact</a>
-  </nav>
+  <div class="header-inner">
+    <div class="logo">
+      <img src="https://files.catbox.moe/vv2hva.png" alt="Jiu's Commissions Logo">
+      <div style="display:flex; flex-direction:column;">
+        <div style="font-size:14px; font-weight:700;">Jiu's Commissions</div>
+        <div style="font-size:11px; color:#8a5e68; margin-top:2px;">Rentry & Commission Service</div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="examplesindex.html">Examples</a>
+      <a href="orderindex.html">Order</a>
+      <a href="pricingindex.html" class="active">Pricing</a>
+      <a href="contactindex.html">Contact</a>
+    </nav>
+  </div>
 </header>
 
 <main>
-  <section class="fade-in">
-    <h1>Pricing Overview</h1>
-    <p>All prices are in USD. Please see add-ons for extra options.</p>
+<section class="fade-in">
+  <h1>Pricing Overview</h1>
+  <p>All prices are in USD. See add-ons for extra options.</p>
+
   <div class="cards">
-    <div class="card float">
-      <img src="https://i.pinimg.com/736x/3f/f4/1e/3ff41e912a2eadfe7255323331681de1.jpg" alt="example1" class="placeholder-img">
-      <p>Simple Rentry $10 minimum</p>
+    <div class="card" data-aos="zoom-in">
+      <img src="https://i.pinimg.com/736x/3f/f4/1e/3ff41e912a2eadfe7255323331681de1.jpg" alt="Simple Rentry">
+      <p>Simple Rentry — $10 minimum</p>
     </div>
-    <div class="card float">
-      <img src="https://i.pinimg.com/736x/aa/f4/33/aaf433a9a63c94e2a09cb433f3410742.jpg" alt="example2" class="placeholder-img">
-      <p>Complex Rentry $15 minimum</p>
+    <div class="card" data-aos="zoom-in">
+      <img src="https://i.pinimg.com/736x/aa/f4/33/aaf433a9a63c94e2a09cb433f3410742.jpg" alt="Complex Rentry">
+      <p>Complex Rentry — $15 minimum</p>
     </div>
-    <div class="card float">
-      <img src="https://i.pinimg.com/736x/06/9a/81/069a81393b2dbd64e20ab2f76f071d0d.jpg" alt="example3" class="placeholder-img">
-      <p>Basic Rentry $5</p>
+    <div class="card" data-aos="zoom-in">
+      <img src="https://i.pinimg.com/736x/06/9a/81/069a81393b2dbd64e20ab2f76f071d0d.jpg" alt="Basic Rentry">
+      <p>Basic Rentry — $5</p>
     </div>
   </div>
-    <a href="pricingaddons.html" class="btn" style="margin-top:16px;">View Add-ons</a>
-  </section>
 
-  <section class="faq fade-in">
-    <h2>FAQ</h2>
-    <div class="faq-item">
-      <strong>Q: Are prices fixed?</strong>
-      <p>A: Base prices are not fixed depending on how many pages or the complexity the site needs, add-ons can change total cost.</p>
-    </div>
-    <div class="faq-item">
-      <strong>Q: Do you offer discounts?</strong>
-      <p>A: Discounts are set during special occasions (e.g Christmas, Valentines, etc).</p>
-    </div>
-      <div class="faq-item">
-      <strong>Q: Does it have a maximum of pages?</strong>
-      <p>A: The maximum goes up to only 5 pages, the user will have to provide the links itself.</p>
-    </div>
-      <div class="faq-item">
-      <strong>Q: Do you do moodboard rentries?</strong>
-      <p>A: Yes I do, however I need references on what kind of rentry the user would prefer to have it look like.</p>
-    </div>    
-    <div class="faq-item">
-      <strong>Q: How long do commissions usually take?</strong>
-      <p>A: Usually 3–10 business days depending on the complexity.</p>
-    </div>
-      <div class="faq-item">
-      <strong>Q:How many revisions can I request?</strong>
-      <p>A: 2 minor revisions are included with every commission.</p>
-    </div>
-      <div class="faq-item">
-      <strong>Q: What is the payment?</strong>
-      <p>A: Payments are through GCash, Paypal, or VGen. It is a 50/50, 50% upfront and 50% after.</p>
-    </div>
-  </section>
+  <a href="pricingaddons.html" class="btn" style="margin-top:20px;">View Add-ons</a>
+</section>
+
+<section class="faq fade-in">
+<h2>FAQ</h2>
+<div class="faq-item">
+  <div class="faq-q"><span>Q: Are prices fixed?</span><i class="fa-solid fa-chevron-down"></i></div>
+  <div class="faq-a">A: Base prices may change depending on page count or complexity. Add-ons can alter total cost.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q"><span>Q: Do you offer discounts?</span><i class="fa-solid fa-chevron-down"></i></div>
+  <div class="faq-a">A: Discounts are applied during special occasions (e.g., Christmas, Valentine's Day).</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q"><span>Q: Maximum number of pages?</span><i class="fa-solid fa-chevron-down"></i></div>
+  <div class="faq-a">A: Maximum is 5 pages. Users must provide the links.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q"><span>Q: Moodboard rentries?</span><i class="fa-solid fa-chevron-down"></i></div>
+  <div class="faq-a">A: Yes, but references are required to determine style and layout.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q"><span>Q: Commission turnaround?</span><i class="fa-solid fa-chevron-down"></i></div>
+  <div class="faq-a">A: Usually 3–10 business days depending on complexity.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q"><span>Q: Revision policy?</span><i class="fa-solid fa-chevron-down"></i></div>
+  <div class="faq-a">A: 2 minor revisions are included with each commission.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q"><span>Q: Payment methods?</span><i class="fa-solid fa-chevron-down"></i></div>
+  <div class="faq-a">A: Payments via GCash, Paypal, or VGen — 50% upfront, 50% after completion.</div>
+</div>
+</section>
 </main>
 
 <footer>
-  <p>© <span id="year"></span> Jiu's Commissions</p>
+<p>© <span id="year"></span> Jiu's Commissions</p>
 </footer>
-<script src="script.js"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({ duration:800, once:true, easing:'ease-out-cubic' });
+
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const q = item.querySelector('.faq-q');
+  q.addEventListener('click',()=> item.classList.toggle('open'));
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
-
-
-
-
