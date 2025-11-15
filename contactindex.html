@@ -497,7 +497,6 @@ async function handleContact(e) {
       body: JSON.stringify(data),
     });
 
-    // Optional user feedback
     showToast(`Thanks, ${name}! I will contact you soon.`);
     document.getElementById('contact-form').reset();
   } catch (err) {
@@ -507,4 +506,5 @@ async function handleContact(e) {
   </script>
 </body>
 </html>
+
 
